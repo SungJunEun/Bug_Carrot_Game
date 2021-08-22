@@ -47,3 +47,8 @@ button {
   color: white;
   margin-top: 5px;
 }
+.bug, .carrot {
+  position: absolute;
+
+
+}
