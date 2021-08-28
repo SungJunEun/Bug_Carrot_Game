@@ -9,6 +9,7 @@ const play = document.querySelector('.play');
 const stop = document.querySelector('.stop');
 const redo = document.querySelector('.redo');
 // default display
+let mycountdown;
 let count_number;
 timer.textContent = `00:10`;
 counter.textContent = `10`;
@@ -25,16 +26,17 @@ play.addEventListener('click',()=>{
   removeclasslist();
 });
 redo.addEventListener('click', ()=>{
-  count_number = 10;
-  counter.textContent = `${count_number}`;
-  start_timer(count_number);
-  random_display();
-  removeclasslist();
+  stop.classList.remove('show');
+  field.innerHTML="";
+  popup.classList.remove('show');
+  timer.textContent = `00:10`;
+  counter.textContent = `10`;
 });
 stop.addEventListener('click', ()=>{
   stop.classList.remove('show');
   field.innerHTML="";
-  show_popup("REPLAY?")
+  show_popup("REPLAY?");
+  clearInterval(mycountdown);
 });
 field.addEventListener('click', (e)=>{
     item_clicked(e);
@@ -70,7 +72,7 @@ function item_display(type, width, height, number) {
 }
 
 function start_timer(seconds) {
- const mycountdown = setInterval(function(){
+ mycountdown = setInterval(function(){
     timer.textContent = `00:${seconds}`;
       seconds--;
       //console.log(count_number);
@@ -95,9 +97,12 @@ function item_clicked(e) {
     count_carrot();
     if(count_number == 0) {
       show_popup("YOU WON!");
+      clearInterval(mycountdown);
+
     }
   } else if(classname == "bug") {
     show_popup("YOU LOST!");
+    clearInterval(mycountdown);
   }
 }
 function show_popup(text) {
