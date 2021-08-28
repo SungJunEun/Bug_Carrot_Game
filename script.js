@@ -6,10 +6,13 @@ const counter = document.querySelector('.counter');
 let popup = document.querySelector('.popup');
 let popup_text = document.querySelector('.popup_text');
 const play = document.querySelector('.play');
-const stop = document.querySelector('.stop');
 const redo = document.querySelector('.redo');
+const icon = document.querySelector('.fa-play');
+
 // default display
-let count_number;
+let count_number = 10;
+let mycountdown;
+let started = false;
 timer.textContent = `00:10`;
 counter.textContent = `10`;
 
@@ -17,25 +20,37 @@ function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-play.addEventListener('click',()=>{
-  count_number = 10;
-  counter.textContent = `${count_number}`;
-  start_timer(count_number);
+play.addEventListener('click', ()=>{
+  if(started) {
+    stopGame();
+  }else {
+    startGame();
+  }
+  started = !started;
+})
+function startGame() {
   random_display();
-  removeclasslist();
-});
-redo.addEventListener('click', ()=>{
-  count_number = 10;
-  counter.textContent = `${count_number}`;
-  start_timer(count_number);
-  random_display();
-  removeclasslist();
-});
-stop.addEventListener('click', ()=>{
-  stop.classList.remove('show');
-  field.innerHTML="";
-  show_popup("REPLAY?")
-});
+  start_timer(10);
+  btn_change();
+}
+function stopGame() {
+  clearInterval(mycountdown);
+  timer.textContent = `00:10`;
+
+  counter.textContent = `10`;
+  field.innerHTML = "";
+  icon.classList.add('fa-play');
+  icon.classList.remove('fa-stop');
+}
+redo.addEventListener('click',()=>{
+  stopGame();
+  started = !started;
+  popup.classList.remove('show');
+})
+function btn_change() {
+  icon.classList.add('fa-stop');
+  icon.classList.remove('fa-play');
+}
 field.addEventListener('click', (e)=>{
     item_clicked(e);
 });
@@ -70,19 +85,19 @@ function item_display(type, width, height, number) {
 }
 
 function start_timer(seconds) {
- const mycountdown = setInterval(function(){
+ mycountdown = setInterval(function(){
     timer.textContent = `00:${seconds}`;
       seconds--;
       //console.log(count_number);
       if (seconds < 0) {
         clearInterval(mycountdown);
-        popup.classList.add('show');
+        show_popup("YOU LOST!");
+
       }
   },1000);
 }
 function removeclasslist() {
   popup.classList.remove('show');
-  stop.classList.add('show');
 }
 
 function item_clicked(e) {
@@ -94,9 +109,11 @@ function item_clicked(e) {
     document.querySelector(`.carrot[data-id="${n_k}"]`).remove();
     count_carrot();
     if(count_number == 0) {
+      clearInterval(mycountdown);
       show_popup("YOU WON!");
     }
   } else if(classname == "bug") {
+    clearInterval(mycountdown)
     show_popup("YOU LOST!");
   }
 }

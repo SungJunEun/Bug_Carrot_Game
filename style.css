@@ -31,11 +31,7 @@ button {
   border-radius: 10px;  
   transition: 100ms ease-in;
 }
-.stop {
-  padding: 10px 12px 6px 12px;
-  position: absolute;
-  visibility: hidden;
-}
+
 button:hover {
   transform: scale(1.05);
 }
