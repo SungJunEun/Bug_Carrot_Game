@@ -93,7 +93,7 @@ function item_clicked(e) {
   if(classname == "field") {
     return;
   } else if(classname == "carrot") {
-    document.querySelector(`.carrot[data-id="${n_k}"]`).remove();
+    e.target.remove();
     count_carrot();
     if(count_number == 0) {
       show_popup("YOU WON!");
