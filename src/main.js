@@ -1,12 +1,14 @@
+'use strict';
+import PopUp from './popup.js';
 // element
+const FinishGameBanner = new PopUp();
+
 const bg = document.querySelector('.bg');
 const field = document.querySelector('.field');
 const timer = document.querySelector('.timer');
 const counter = document.querySelector('.counter');
-let popup = document.querySelector('.popup');
-let popup_text = document.querySelector('.popup_text');
+
 const play = document.querySelector('.play');
-const redo = document.querySelector('.redo');
 const icon = document.querySelector('.fa-play');
 
 // default display
@@ -26,14 +28,15 @@ play.addEventListener('click', ()=>{
   }else {
     startGame();
   }
-  started = !started;
 })
 function startGame() {
+  started = !started;
   random_display();
   start_timer(10);
   btn_change();
 }
 function stopGame() {
+  started = !started;
   clearInterval(mycountdown);
   timer.textContent = `00:10`;
 
@@ -42,11 +45,9 @@ function stopGame() {
   icon.classList.add('fa-play');
   icon.classList.remove('fa-stop');
 }
-redo.addEventListener('click',()=>{
-  stopGame();
-  started = !started;
-  popup.classList.remove('show');
-})
+
+FinishGameBanner.setClickEvent(stopGame);
+
 function btn_change() {
   icon.classList.add('fa-stop');
   icon.classList.remove('fa-play');
@@ -63,7 +64,7 @@ function random_display() {
 
 let k = 0; // for data-id
 function item_display(type, width, height, number) {
-  for( i=0;i<number;i++) {
+  for( let i=0;i<number;i++) {
     const bgd = bg.getBoundingClientRect();
     const left = bgd.left;
     const right = bgd.right - width;
@@ -91,14 +92,12 @@ function start_timer(seconds) {
       //console.log(count_number);
       if (seconds < 0) {
         clearInterval(mycountdown);
-        show_popup("YOU LOST!");
+        FinishGameBanner.show("YOU LOST!");
 
       }
   },1000);
 }
-function removeclasslist() {
-  popup.classList.remove('show');
-}
+
 
 function item_clicked(e) {
   const classname = e.target.className;
@@ -110,17 +109,14 @@ function item_clicked(e) {
     count_carrot();
     if(count_number == 0) {
       clearInterval(mycountdown);
-      show_popup("YOU WON!");
+        FinishGameBanner.show("YOU WIN!");
     }
   } else if(classname == "bug") {
     clearInterval(mycountdown)
-    show_popup("YOU LOST!");
+    FinishGameBanner.show("YOU LOST!");
   }
 }
-function show_popup(text) {
-  popup_text.textContent = text;
-  popup.classList.add('show');
-}
+
 function count_carrot() {
   count_number --;
   counter.textContent = `${count_number}`;
