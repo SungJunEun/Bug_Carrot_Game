@@ -7,7 +7,7 @@
 
 - Work with Web API (setInterval,scroll)
 - Try refactoring and practice JS modules
-- Project based on [Online Course from Dream Coding](https://academy.dream-coding.com/courses/browser101)
+- Project based on [Frontend 101 Online COurse](https://academy.dream-coding.com/courses/browser101) from Dream Coding
 
 *from 2021.08.21 - 31.*
 
@@ -52,8 +52,12 @@ with Github.
 
             - user clicks `bug` element
             
+                ![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/60536942/133957898-d5b59f0f-eb9b-4923-b9db-caf4ad799a7c.gif)
+            
         2. **YOU WIN!**
             - user clicks all of the `carrot` elements
+            
+                ![ezgif com-gif-maker (4)](https://user-images.githubusercontent.com/60536942/133958060-584f30ac-e724-4ec2-ad7e-8c7ca76625ae.gif)
         
 
 ## Refactoring
