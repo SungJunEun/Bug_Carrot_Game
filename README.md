@@ -45,12 +45,14 @@ with Github.
 - ### Pop-up
     - create `FinishGameBanner` instance of `PopUp` class in **popup.js**
     - `show` method to show pop-up in following cases
-        1) text: **YOU LOST!**
-            - number reaches to 0  ![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/60536942/133957579-ec675c5d-677f-4894-ba0d-f9e30b9a603c.gif)
+        1. **YOU LOST!**
+            - number reaches to 0 
+            
+                ![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/60536942/133957579-ec675c5d-677f-4894-ba0d-f9e30b9a603c.gif)
 
             - user clicks `bug` element
             
-        2) text: **YOU WIN!**
+        2. **YOU WIN!**
             - user clicks all of the `carrot` elements
         
 
